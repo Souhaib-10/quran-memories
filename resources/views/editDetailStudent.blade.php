@@ -34,11 +34,12 @@
             <div class="mb-6">
                 <label for="fraction">أثمان</label>
                 <select name="fraction" id="fraction" class="block py-2.5 px-0 w-9/12 text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                    <option value="{{old("fraction","$memorize->fraction")}}">الثمن{{$memorize->fraction}}  </option>
-                    {{-- @for ($i = 0; $i < 8; $i++) --}}
-                        <option value="{{$i}}">{{$i}}الثمن</option>
-                    {{-- @endfor --}}
-                {{-- </select> --}}
+                    @for ($i = 0; $i < 8; $i++)
+                        <option value="{{ $i }}" {{ old('fraction', $memorize->fraction) == $i ? 'selected' : '' }}>
+                            الثمن {{ $i }}
+                        </option>
+                    @endfor
+                </select>
             </div>
             <div class="mb-6">
                 <label for="review">مراجعة</label>
