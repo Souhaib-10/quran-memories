@@ -37,7 +37,7 @@
                     <option value="{{old("fraction","$memorize->fraction")}}">الثمن{{$memorize->fraction}}  </option>
                     {{-- @for ($i = 0; $i < 8; $i++) --}}
                         <option value="{{$i}}">{{$i}}الثمن</option>
-                    @endfor
+                    {{-- @endfor --}}
                 {{-- </select> --}}
             </div>
             <div class="mb-6">
