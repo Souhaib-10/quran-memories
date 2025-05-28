@@ -88,7 +88,7 @@ class StudentController extends Controller
             $totalHizb = $student->memorizes->sum('hizb');
             $totalFraction = $student->memorizes->sum('fraction');
             $totalReview = $student->memorizes->sum('review');
-            // how frcation can give hizb (ex: 8f=>1hisb)
+            // how fraction can give hizb (ex: 8f=>1hisb)
             $additionalHizb = intdiv($totalFraction, 8);
             // rest fraction after split hizb
             $remainingFraction = $totalFraction % 8;
@@ -102,6 +102,15 @@ class StudentController extends Controller
             } else {
                 $remainingHizb = $allHizbMemories;
             }
+            // calculate level student
+            if ($remainingHizb < 30) {
+                $detectedLevel = intdiv($remainingHizb, 5) + 1;
+            } else {
+                $detectedLevel = 7;
+                $fractionAllHizbMemories = $remainingHizb - 30;
+                $detectedLevel += intdiv($fractionAllHizbMemories, 10);
+            }
+            $student->level = $detectedLevel;
             $student->adjustedHizb = $remainingHizb;
             $student->adjustedFraction = $remainingFraction;
             $student->adjustedReview = $totalReview;
