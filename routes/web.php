@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\MemorizeController;
+use App\Http\Controllers\AttendanceController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -50,3 +51,14 @@ Route::post('/logout/quran', [AuthController::class, 'logout'])->name('logout.qu
 // ])->group(function () {
 //     Route::resource('admins', AdminController::class);
 // });
+
+// Route attendance
+Route::prefix('attendance')->group(function () {
+    Route::get("/", [AttendanceController::class, "index"])->name("attendance.index");
+    Route::get("/create", [AttendanceController::class, "create"])->name("attendance.create");
+    Route::post("/", [AttendanceController::class, "store"])->name("attendance.store");
+    Route::delete("/{attendance}", [AttendanceController::class, "destroy"])->name("attendance.destroy");
+    Route::get("/{attendance}/edit", [AttendanceController::class, "edit"])->name("attendance.edit");
+    Route::put("/{attendance}", [AttendanceController::class, "update"])->name("attendance.update");
+    Route::get("/{attendance}", [AttendanceController::class, "show"])->name("attendance.show");
+});
