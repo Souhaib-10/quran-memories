@@ -48,9 +48,9 @@ class AttendanceController extends Controller
                     'status' => $data['status'],
                 ]);
             }
-            return redirect()->route('attendance.index')->with('success', 'Attendance created successfully');
+            return redirect()->route('attendance.index')->with('success', 'تم تسجيل الحضور بنجاح');
         }
-        return redirect()->route('attendance.create')->with('error', 'Attendance creation failed');
+        return redirect()->route('attendance.create')->with('error', 'فشل تسجيل الحضور');
     }
     public function show($student_id)
     {
@@ -71,7 +71,7 @@ class AttendanceController extends Controller
     ]);
 
     if (!$validated) {
-        return redirect()->route('attendance.edit', $attendance_id)->with('error', 'Attendance update failed');
+        return redirect()->route('attendance.edit', $attendance_id)->with('error', 'فشل تعديل الحضور');
     }
     // Find the attendance record
     $attendance = Attendance::findOrFail($attendance_id);
@@ -82,14 +82,14 @@ class AttendanceController extends Controller
 
     // Redirect back with success message
     return redirect()->route('attendance.show', $attendance->student_id)
-                     ->with('success', 'Attendance updated successfully.');
+                     ->with('success', 'تم تعديل الحضور بنجاح');
     }
 
     public function destroy($id)
     {
         $attendance = Attendance::findOrFail($id);
         $attendance->delete();
-        return redirect()->route('attendance.index')->with('success', 'Attendance deleted successfully');
+        return redirect()->route('attendance.index')->with('success', 'تم حذف الحضور بنجاح');
     }
 
 
